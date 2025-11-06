@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: fbus-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python render_api_server.py
+    envVars:
+      - key: ES_HOST
+        value: http://72.61.17.220:9200
+      - key: ES_USER
+        value: user1
+      - key: ES_PASSWORD
+        value: userfbus1025
+      - key: INDEX_PATTERN
+        value: fbus*,smfb*,smfbgermania*
+      - key: API_USERNAME
+        value: admin
+      - key: API_PASSWORD
+        generateValue: true
+    healthCheckPath: /health
